@@ -1,22 +1,30 @@
 <template>
-  <q-page class="page">
-    <div>
-      <q-avatar square size="50px" class="menina">
-        <img src="~assets/images/menina.png">
-      </q-avatar>
-      <q-avatar size="150px" class="bebe">
-        <img src="~assets/images/bebe.png" style="width: 90%; height: 90%;">
-      </q-avatar>
-      <q-avatar square size="50px" class="garoto">
-        <img src="~assets/images/garoto.png">
-      </q-avatar>
-    </div>
-    <div>
-      <q-input rounded outlined label="Nome" class="input-nome" v-model="nome"/>
-      <q-input rounded outlined label="Data de Nascimento" class="input-data" v-model="dataNasciment"/>
-      <q-btn no-caps id="btn-cont">Continuar</q-btn>
-    </div>
+  <q-form>
+    <q-page class="page" :style="{ backgroundColor: bgColor }">
+      <div>
+        <div @click="changeColorGirl">
+          <q-avatar square size="50px" class="menina">
+            <img src="~assets/images/menina.png">
+          </q-avatar>
+        </div>
+        <div>
+          <q-avatar size="150px" class="bebe">
+            <img src="~assets/images/bebe.png" style="width: 90%; height: 90%;">
+          </q-avatar>
+        </div>
+        <div @click="changeColorBoy">
+          <q-avatar square size="50px" class="garoto">
+            <img src="~assets/images/garoto.png">
+          </q-avatar>
+        </div>
+      </div>
+      <div>
+        <q-input rounded outlined label="Nome" class="input-nome" v-model="nome" />
+        <q-input rounded outlined label="Data de Nascimento" class="input-data" v-model="dataNasciment"/>
+        <q-btn no-caps id="btn-cont">Continuar</q-btn>
+      </div>
   </q-page>
+</q-form>
 </template>
 
 <script>
@@ -28,24 +36,30 @@ export default defineComponent({
       return {
         nome: '',
         dataNasciment: '',
+        bgColor: '#D9DADB'
       }
+  },
+  methods: {
+    changeColorBoy(){
+      this.bgColor= '#B7D7F8'
+    },
+    changeColorGirl(){
+      this.bgColor= '#FFCEFE'
+    }
   }
 })
 </script>
 
-<style scoped> 
+<style scoped>
 
-.page{
-  background-color: #D9DADB;
-}
 .page #btn-cont{
-  background-color: #909090;
+  background-color: #777777;
   position: absolute;
   bottom: 0%;
   width: 100%;
   height: 15%;
   margin-left: 0%;
-  font-size: 200%;
+  font-size: 250%;
   color: white;
   font-family: 'bree-serif', sans-serif;
 }

@@ -19,12 +19,12 @@
         </div>
       </div>
       <div>
-        <q-input rounded outlined label="Nome" class="input-nome" v-model="nome" />
-        <q-input rounded outlined label="Data de Nascimento" class="input-data" v-model="dataNasciment"/>
-        <q-btn no-caps id="btn-cont">Continuar</q-btn>
+        <q-input rounded outlined label="Nome" class="input-nome" v-model="nome" :rules="[val => !!val || 'Este campo é obrigatório']"/>
+        <q-input rounded outlined label="Data de Nascimento" class="input-data" v-model="dataNasciment" :rules="[val => !!val || 'Este campo é obrigatório']"/>
+        <q-btn no-caps type="submit" id="btn-cont">Continuar</q-btn>
       </div>
-  </q-page>
-</q-form>
+    </q-page>
+  </q-form>
 </template>
 
 <script>
@@ -45,6 +45,9 @@ export default defineComponent({
     },
     changeColorGirl(){
       this.bgColor= '#FFCEFE'
+    },
+    submit(){
+      
     }
   }
 })

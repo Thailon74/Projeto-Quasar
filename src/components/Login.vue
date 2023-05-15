@@ -1,12 +1,25 @@
 <template>
-  <q-page class="login-page">
-    <div class="login-form">
-      <q-input v-model="username" label="CPF" />
-      <br>
-      <q-input v-model="password" label="Senha" type="password" />
-      <q-btn label="Entrar" class="q-mt-md" id="btn-login" @click="login" />
-    </div>
-  </q-page>
+  <q-form>
+    <q-page class="login-page">
+      <div class="row" style="height: 100%;">
+        <div class="col col-5" style="margin-top: 30%; margin-left: 30%;">
+          <q-avatar square size="150px">
+            <img src="~assets/images/vacinado.png">
+          </q-avatar>
+        </div>
+      </div>
+      <div class="login-form">
+        <q-input v-model="username" label="CPF" />
+        <br>
+        <q-input v-model="password" label="Senha" type="password" />
+        <br>
+        <q-btn rounded label="Login" id="btn-login" @click="login" style="width: 100%; background-color: white;"/>
+        <br>
+        <br>
+        <label style="margin-left: 40%; font-size: medium;">Registre-se</label>
+      </div>
+    </q-page>
+  </q-form>
 </template>
 
 <script>
@@ -28,20 +41,12 @@ export default {
 
 <style scoped>
 .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  background-color: #D9DADB;
 }
 
-.login-form {
-  width: 400px;
-  padding: 30px;
-  background-color: #fff;
-}
-
-#btn-login{
-  background-color: white;
+.login-form{
+  padding: 5%;
+  margin-top: 25%;
 }
 
 </style>

@@ -4,26 +4,28 @@
       <q-toolbar style="border-bottom: 1px black solid ;">
         <q-btn flat dense color="white" icon="arrow_back"/>
       </q-toolbar>
-      <div class="dependentes">
-        <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: #B7D7F8;">
+
+      <div v-for="(task, key) in tasks" :key="key" class="dependentes">
+        <q-btn no-caps rounded style="width: 75%; height: 60px;" :style="{backgroundColor:bgColorF}">
           <q-btn-item style="margin-left: -80%; position: absolute">
             <q-icon style="width: 50px;">
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
-          <span style="font-size: 20px; color: black; position: fixed;">Nome</span>
+          <span style="font-size: 20px; color: black; position: fixed;">{{task.nome}}</span>
           <q-btn-item style="margin-left: 70%; position: absolute;">
             <q-icon style="width: 50px;">
-              <q-img src="~/assets/images/garoto.png" style="width: 50px; height: 50px;"/>
+              <q-img src="imagemSexo" style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
         </q-btn>
       </div>
+
       <div class="addDepend">
         <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: #D9DADB;">
           <q-btn-item>
             <q-icon style="width: 50px;">
-              <span style="font-size: 50px; color: #777777;">+</span>
+              <span style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; color: #777777;">+</span>
             </q-icon>
           </q-btn-item>
           <span>Adicionar Dependente</span>
@@ -35,13 +37,30 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useQuasar } from 'quasar'
+import { mapGetters, mapActions } from 'vuex'
 
 export default defineComponent({
   name: 'MENU',
+  setup() {
+    const $q = useQuasar()
+  },
   data() {
       return {
-        bgColor: '#777777'
+        bgColor: '#777777',
+        bgColorM: '#B7D7F8',
+        bgColorF: '#FFCEFE'
       }
+  },
+  computed: {
+    ...mapGetters('tasks', ['tasks']),
+  },
+  methods:{
+    ...mapActions('tasks', ['updateTask', 'deleteTask']),
+
+    imagemSexo(){
+      return this.tasks.sexo === 'Masculino' ? bgColorM : bgColorF;
+    },
   },
 
 

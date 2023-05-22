@@ -6,7 +6,7 @@
       </q-toolbar>
 
       <div v-for="(task, key) in tasks" :key="key" class="dependentes">
-        <q-btn no-caps rounded style="width: 75%; height: 60px;" :style="{backgroundColor:bgColorF}">
+        <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: corSexo;">
           <q-btn-item style="margin-left: -80%; position: absolute">
             <q-icon style="width: 50px;">
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
@@ -59,8 +59,12 @@ export default defineComponent({
     ...mapActions('tasks', ['updateTask', 'deleteTask']),
 
     imagemSexo(){
-      return this.tasks.sexo === 'Masculino' ? bgColorM : bgColorF;
+      return "~/assets/images/bebe.png"
     },
+
+    corSexo(){
+      return bgcolorF
+    }
   },
 
 

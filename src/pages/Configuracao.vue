@@ -6,7 +6,7 @@
       </q-toolbar>
 
       <div v-for="(task, key) in tasks" :key="key" class="dependentes">
-        <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: corSexo;">
+        <q-btn no-caps rounded class="btnDependente" :style="corSexo()">
           <q-btn-item style="margin-left: -80%; position: absolute">
             <q-icon style="width: 50px;">
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
@@ -15,7 +15,8 @@
           <span style="font-size: 20px; color: black; position: fixed;">{{task.nome}}</span>
           <q-btn-item style="margin-left: 70%; position: absolute;">
             <q-icon style="width: 50px;">
-              <q-img src="imagemSexo" style="width: 50px; height: 50px;"/>
+              <q-img v-if="task.sexo == 'Masculino'" src="~/assets/images/garoto.png"  style="width: 50px; height: 50px;"/>
+              <q-img v-else src="~/assets/images/menina.png"  style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
         </q-btn>
@@ -58,12 +59,9 @@ export default defineComponent({
   methods:{
     ...mapActions('tasks', ['updateTask', 'deleteTask']),
 
-    imagemSexo(){
-      return "~/assets/images/bebe.png"
-    },
-
     corSexo(){
-      return bgcolorF
+      return "background-color: " + this.bgColorM;
+      
     }
   },
 
@@ -88,5 +86,10 @@ span{
   width: 100%;
   margin-left: 10%;
   margin-top: 10%;
+}
+
+.btnDependente {
+  width: 75%; 
+  height: 60px;
 }
 </style>

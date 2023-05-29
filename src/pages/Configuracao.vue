@@ -6,13 +6,13 @@
       </q-toolbar>
 
       <div v-for="(task, key) in tasks" :key="key" class="dependentes">
-        <q-btn no-caps rounded class="btnDependente" :style="corSexo()">
+        <q-btn no-caps rounded class="btnDependente" :style="corSexo(task.sexo)">
           <q-btn-item style="margin-left: -80%; position: absolute">
             <q-icon style="width: 50px;">
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
-          <span style="font-size: 20px; color: black; position: fixed;">{{task.nome}}</span>
+          <span style="font-size: 20px; color: black; position: absolute;">{{task.nome}}</span>
           <q-btn-item style="margin-left: 70%; position: absolute;">
             <q-icon style="width: 50px;">
               <q-img v-if="task.sexo == 'Masculino'" src="~/assets/images/garoto.png"  style="width: 50px; height: 50px;"/>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="addDepend">
-        <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: #D9DADB;">
+        <q-btn no-caps rounded style="width: 75%; height: 60px; background-color: #D9DADB;" @click="confirmar">
           <q-btn-item>
             <q-icon style="width: 50px;">
               <span style="font-family: Arial, Helvetica, sans-serif; font-size: 50px; color: #777777;">+</span>
@@ -59,9 +59,13 @@ export default defineComponent({
   methods:{
     ...mapActions('tasks', ['updateTask', 'deleteTask']),
 
-    corSexo(){
-      return "background-color: " + this.bgColorM;
-      
+    corSexo(sexo){
+      var teste;
+      sexo == "Masculino" ? teste= this.bgColorM : teste=this.bgColorF
+      return "background-color: " + teste;
+    },
+    confirmar(){
+      this.$router.push('/dependente')
     }
   },
 
@@ -89,7 +93,7 @@ span{
 }
 
 .btnDependente {
-  width: 75%; 
+  width: 75%;
   height: 60px;
 }
 </style>

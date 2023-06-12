@@ -6,13 +6,13 @@
       </q-toolbar>
 
       <div v-for="(task, key) in tasks" :key="key" class="dependentes">
-        <q-btn no-caps rounded class="btnDependente" :style="corSexo(task.sexo)">
+        <q-btn no-caps rounded class="btnDependente" :style="corSexo(task.sexo)" @click="OpenDepen(task.id)">
           <q-btn-item style="margin-left: -80%; position: absolute">
             <q-icon style="width: 50px;">
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
-          <span style="font-size: 20px; color: black; position: absolute;">{{task.nome}}</span>
+          <span style="font-size: 20px; color: black; position: absolute;">{{task.nome}} , {{ task.id }}</span>
           <q-btn-item style="margin-left: 70%; position: absolute;">
             <q-icon style="width: 50px;">
               <q-img v-if="task.sexo == 'Masculino'" src="~/assets/images/garoto.png"  style="width: 50px; height: 50px;"/>
@@ -66,6 +66,10 @@ export default defineComponent({
     },
     confirmar(){
       this.$router.push('/dependente')
+    },
+    OpenDepen(id){
+      this.$router.push('/menu/:' + id)
+      console.log(id)
     }
   },
 

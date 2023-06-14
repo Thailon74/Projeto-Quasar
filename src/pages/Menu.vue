@@ -1,10 +1,9 @@
 <template>
   <q-form>
-    <q-page class="page" :style="{ backgroundColor: bgColor }">
-      <div v-for="(task,key) in getTask(1)" :key="key">
+    <q-page class="page" :style="{ backgroundColor: bgColor2 }">
         <div class="superior">
           <div>
-            <q-avatar square size="50px" class="configuracao">
+            <q-avatar square size="50px" class="configuracao" @click="trocarDepend">
               <img src="~assets/images/configuracao.png">
             </q-avatar>
           </div>
@@ -12,7 +11,7 @@
           <q-avatar size="150px" class="bebe">
             <img src="~assets/images/bebe.png" style="width: 90%; height: 90%;">
           </q-avatar>
-          <label>{{task.nome}}</label>
+          <label> {{dependente.nome}}</label>
           
           <div>
             <q-avatar square size="50px" class="calendario">
@@ -20,7 +19,7 @@
             </q-avatar>
           </div>
         </div>
-        <div class="inferior">
+        <div class="inferior" :style="{ backgroundColor: bgColor }">
           <div class="registradas">
             <label>Registradas</label>
             <q-btn-group rounded style="background-color: #777777; width: 80%;">
@@ -43,7 +42,6 @@
             <q-btn round style="background-color: #777777;" text-color="white">+</q-btn>
           </div>
         </div>
-      </div>
       </q-page>
     </q-form>
 </template>
@@ -57,16 +55,25 @@ export default defineComponent({
   data() {
       return {
         bgColor: '#777777',
+        bgColor2: '#777777',
+        dependente: {}
       }
   }, computed: {
-    ...mapGetters('tasks', ['tasks']),
+    ...mapGetters('tasks', ['getTask']),
   },
   methods: {
-    ...mapGetters('tasks', ['getTask']),
-    buscar(){
-      return this.getTask(this.$route.params.id) 
+    trocarDepend(){ 
+      this.$router.push('/config')
     },
   },
+  mounted() {
+    this.dependente = { ...this.getTask(this.$route.params.id) }
+    if(this.dependente.sexo == "Masculino"){
+      this.bgColor= '#B7D7F8'
+    }else{
+      this.bgColor= '#FFCEFE'
+    }
+  }
 })
 </script>
 

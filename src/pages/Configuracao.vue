@@ -12,7 +12,7 @@
               <q-img src="~/assets/images/bebe.png" style="width: 50px; height: 50px;"/>
             </q-icon>
           </q-btn-item>
-          <span style="font-size: 20px; color: black; position: absolute;">{{task.nome}} , {{ task.id }}</span>
+          <span style="font-size: 20px; color: black; position: absolute;">{{task.nome}}</span>
           <q-btn-item style="margin-left: 70%; position: absolute;">
             <q-icon style="width: 50px;">
               <q-img v-if="task.sexo == 'Masculino'" src="~/assets/images/garoto.png"  style="width: 50px; height: 50px;"/>
@@ -68,7 +68,7 @@ export default defineComponent({
       this.$router.push('/dependente')
     },
     OpenDepen(id){
-      this.$router.push('/menu/:' + id)
+      this.$router.push('/menu/' + id)
       console.log(id)
     }
   },

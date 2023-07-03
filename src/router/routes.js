@@ -1,26 +1,30 @@
+import MainLayout from 'layouts/MainLayout.vue';
+import Login from 'components/Login.vue';
+import Register from 'components/Register.vue';
+import Dependente from 'pages/Dependente.vue';
+import EmailConfirmation from 'pages/EmailConfirmation.vue';
+import Menu from 'pages/Menu.vue';
+import Configuracao from 'pages/Configuracao.vue';
+import ErrorNotFound from 'pages/ErrorNotFound.vue';
 
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
     children: [
-      { path: '', component: () => import('components/Login.vue')},
-      { path: "/login", component: () => import("components/Login.vue")},
-      { path: "/register", component: () => import("components/Register.vue")},
-      { path: "/dependente", component: () => import("pages/Dependente.vue")},
-      { path: "email-confirmation", name: "email-confirmation", component: () => import("pages/EmailConfirmation.vue")},
-      { path: "/menu/:id", name:'menu', component: () => import("pages/Menu.vue")} ,
-      { path: "/config", component: () => import("pages/Configuracao.vue")},
-    ]
+      { path: '', component: Login },
+      { path: '/login', component: Login },
+      { path: '/register', component: Register },
+      { path: '/dependente', component: Dependente },
+      { path: '/email-confirmation', name: 'email-confirmation', component: EmailConfirmation },
+      { path: '/menu/:id', name: 'menu', component: Menu },
+      { path: '/config', component: Configuracao },
+    ],
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
+    component: ErrorNotFound,
+  },
+];
 
-]
-
-export default routes
+export default routes;

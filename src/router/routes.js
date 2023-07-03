@@ -4,12 +4,11 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '', component: () => import('components/Login.vue')},
       { path: "/login", component: () => import("components/Login.vue")},
       { path: "/dependente", component: () => import("pages/Dependente.vue")},
       { path: "/menu/:id", component: () => import("pages/Menu.vue")} ,
       { path: "/config", component: () => import("pages/Configuracao.vue")},
-      { path: "/login", component: () => import("pages/Login.vue")}
     ]
   },
 

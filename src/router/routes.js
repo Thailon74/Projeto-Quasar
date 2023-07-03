@@ -6,8 +6,10 @@ const routes = [
     children: [
       { path: '', component: () => import('components/Login.vue')},
       { path: "/login", component: () => import("components/Login.vue")},
+      { path: "/register", component: () => import("components/Register.vue")},
       { path: "/dependente", component: () => import("pages/Dependente.vue")},
-      { path: "/menu/:id", component: () => import("pages/Menu.vue")} ,
+      { path: "email-confirmation", name: "email-confirmation", component: () => import("pages/EmailConfirmation.vue")},
+      { path: "/menu/:id", name:'menu', component: () => import("pages/Menu.vue")} ,
       { path: "/config", component: () => import("pages/Configuracao.vue")},
     ]
   },

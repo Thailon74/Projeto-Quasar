@@ -33,12 +33,14 @@
 import { defineComponent, ref } from "vue";
 import userAuthUser from "src/composables/UseAuthUser";
 import { useRouter } from "vue-router";
+import { useQuasar } from 'quasar';
 
 export default defineComponent({
   name: "PageLogin",
 
   setup() {
     const router = useRouter();
+    const $q = useQuasar();
 
     const { login } = userAuthUser();
 
@@ -52,8 +54,12 @@ export default defineComponent({
         await login(form.value);
         router.push('/menu/1');
       } catch (error) {
-        alert(error);
-      }
+          $q.notify({
+            message: error.message,
+            icon: 'announcement',
+            color: 'red'
+          })
+        }
     };
     return {
       form,

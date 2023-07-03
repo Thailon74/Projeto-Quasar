@@ -28,11 +28,14 @@
   import { defineComponent, ref } from "vue";
   import useAuthUser from "src/composables/UseAuthUser";
   import { useRouter } from "vue-router";
+  import { useQuasar } from 'quasar';
   
   export default defineComponent({
     name: "PageRegister",
   
     setup() {
+      const $q = useQuasar();
+
       const router = useRouter();
       const { register } = useAuthUser();
       const form = ref({
@@ -49,7 +52,11 @@
             query: { email: form.value.email },
           });
         } catch (error) {
-          alert(error);
+            $q.notify({
+                message: error.message,
+                icon: 'announcement',
+                color: 'red'
+            })
         }
       };
   

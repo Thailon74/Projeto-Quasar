@@ -1,5 +1,7 @@
 <template>
-  <q-form>
+  <q-form
+    @submit.prevent="handleLogin"
+  >
     <q-page class="login-page">
       <div class="row" style="height: 100%;">
         <div class="col col-5" style="margin-top: 30%; margin-left: 30%;">
@@ -9,35 +11,58 @@
         </div>
       </div>
       <div class="login-form">
-        <q-input v-model="username" label="CPF" />
+        <q-input v-model="form.email" label="E-mail" />
         <br>
-        <q-input v-model="password" label="Senha" type="password" />
+        <q-input v-model="form.password" label="Senha" type="password" />
         <br>
-        <q-btn rounded label="Login" id="btn-login" @click="login" style="width: 100%; background-color: white;"/>
+        <q-btn class="btn" rounded label="Login" id="btn-login" type="submit"/>
         <br>
         <br>
-        <label style="margin-left: 40%; font-size: medium;">Registre-se</label>
+        <q-btn
+              class="btn"
+              label="Registre-se"
+              rounded
+              to="/register"
+          />
       </div>
     </q-page>
   </q-form>
 </template>
 
 <script>
-export default {
-  name: "LoginPage",
-  data() {
+import { defineComponent, ref } from "vue";
+import userAuthUser from "src/composables/UseAuthUser";
+import { useRouter } from "vue-router";
+
+export default defineComponent({
+  name: "PageLogin",
+
+  setup() {
+    const router = useRouter();
+
+    const { login } = userAuthUser();
+
+    const form = ref({
+      email: "",
+      password: "",
+    });
+
+    const handleLogin = async () => {
+      try {
+        await login(form.value);
+        router.push('/menu/1');
+      } catch (error) {
+        alert(error);
+      }
+    };
     return {
-      username: "",
-      password: ""
+      form,
+      handleLogin,
     };
   },
-  methods: {
-    login() {
-      //autenticacao
-    }
-  }
-};
+});
 </script>
+
 
 <style scoped>
 .login-page {
@@ -47,6 +72,15 @@ export default {
 .login-form{
   padding: 5%;
   margin-top: 25%;
+}
+
+.btn {
+  width: 100%;
+  background-color: white;
+}
+
+.btn:hover {
+  background-color: grey;
 }
 
 </style>

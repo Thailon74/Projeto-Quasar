@@ -67,7 +67,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.dependente = { ...this.getTask(this.$route.params.id) }
+    this.dependente = {...this.getTask(this.$route.params.id)}
     if(this.dependente.sexo == "Masculino"){
       this.bgColor= '#B7D7F8'
     }else{

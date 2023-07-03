@@ -3,5 +3,6 @@ export function tasks (state) {
 }
 
 export function getTask (state) {
+  console.log("cheguei aqui", state)
   return (id) => state.tasks[id]
 }

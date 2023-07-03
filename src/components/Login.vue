@@ -52,7 +52,7 @@ export default defineComponent({
     const handleLogin = async () => {
       try {
         await login(form.value);
-        router.push('/menu/1');
+        router.push('/config');
       } catch (error) {
           $q.notify({
             message: error.message,

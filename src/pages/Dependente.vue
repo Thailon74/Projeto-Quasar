@@ -54,7 +54,8 @@ export default defineComponent({
       task:{
         nome: '',
         dataNascimento: '',
-        sexo:''
+        sexo:'',
+        vacinas:[],
       },
       bgColor: '#D9DADB'
     }

@@ -6,6 +6,7 @@ import EmailConfirmation from 'pages/EmailConfirmation.vue';
 import Menu from 'pages/Menu.vue';
 import Configuracao from 'pages/Configuracao.vue';
 import ErrorNotFound from 'pages/ErrorNotFound.vue';
+import Vacinas from 'pages/Vacinas.vue';
 
 const routes = [
   {
@@ -19,6 +20,8 @@ const routes = [
       { path: '/email-confirmation', name: 'email-confirmation', component: EmailConfirmation },
       { path: '/menu/:id', name: 'menu', component: Menu },
       { path: '/config', component: Configuracao },
+      { path: '/vacinas/:id', component: Vacinas },
+
     ],
   },
   {

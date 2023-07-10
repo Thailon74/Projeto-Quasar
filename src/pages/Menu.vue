@@ -22,33 +22,43 @@
         <div class="inferior" :style="{ backgroundColor: bgColor }">
           <div class="registradas">
             <label>Registradas</label>
-            <q-btn-group rounded style="background-color: #777777; width: 80%;">
-              <q-avatar square size="50px">
-                <img src="~assets/images/seringa.png" style="width: 80%; height: 80%; margin-left: 9px;">
-              </q-avatar>
-              <q-btn unelevated rounded style="background-color: bgColor; width: 100%; color: white;" label="Data - Nome vacina" />
-            </q-btn-group>
           </div>
-          <div class="futuras">
+          <div v-for="(vacina, key) in dependente.vacinas" :key="key">
+            <div v-if="isDataMenor(vacina.data)" class="vacinas">
+              <q-btn-group rounded style="background-color: #777777; width: 80%;">
+                <q-avatar square size="50px">
+                  <img src="~assets/images/seringa.png" style="width: 80%; height: 80%; margin-left: 9px;">
+                </q-avatar>
+                <q-btn unelevated rounded style="background-color: bgColor; width: 100%; color: white;">{{ vacina.nome }} - {{ vacina.data }}</q-btn>
+              </q-btn-group>
+            </div>
+          </div>
+          <div class="registradas">
             <label>Vacinas Futuras</label>
-            <q-btn-group rounded style="background-color: #777777; width: 80%;">
-              <q-avatar square size="50px">
-                <img src="~assets/images/seringa.png" style="width: 80%; height: 80%; margin-left: 9px;">
-              </q-avatar>
-              <q-btn unelevated rounded style="background-color: bgColor; width: 100%; color: white;" label="Data - Nome vacina" />
-            </q-btn-group>
           </div>
+          <div v-for="(vacina, key) in dependente.vacinas" :key="key">
+            <div  v-if="isDataMaior(vacina.data)" class="vacinas">
+              <q-btn-group rounded style="background-color: #777777; width: 80%;">
+                <q-avatar square size="50px">
+                  <img src="~assets/images/seringa.png" style="width: 80%; height: 80%; margin-left: 9px;">
+                </q-avatar>
+                <q-btn unelevated rounded style="background-color: bgColor; width: 100%; color: white;">{{ vacina.nome }} - {{ vacina.data }}</q-btn>
+              </q-btn-group>
+            </div>
+          </div>
+          
           <div class="addVacin">
-            <q-btn round style="background-color: #777777;" text-color="white">+</q-btn>
+            <q-btn round style="background-color: #777777;" text-color="white" @click="novoRegistro(dependente.id)">+</q-btn>
           </div>
         </div>
       </q-page>
-    </q-form>
+  </q-form>
 </template>
 
 <script>
+import { date } from 'quasar'
 import { defineComponent } from 'vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default defineComponent({
   name: 'MENU',
@@ -56,18 +66,38 @@ export default defineComponent({
       return {
         bgColor: '#777777',
         bgColor2: '#777777',
-        dependente: {}
+        dependente: {},
+        registros: [],
       }
-  }, computed: {
-    ...mapGetters('tasks', ['getTask']),
+  }, 
+  computed: {
+      ...mapGetters('tasks', ['getTask']),
+      ...mapGetters('tasks', ['tasks']),
   },
   methods: {
     trocarDepend(){ 
       this.$router.push('/config')
     },
+    isDataMaior(data) {
+      const dataAtual = new Date();
+      const dataComparacao = new Date(data);
+
+      return dataComparacao > dataAtual;
+    },
+    isDataMenor(data) {
+      const dataAtual = new Date();
+      const dataComparacao = new Date(data);
+
+      return dataComparacao < dataAtual;
+    },
+    novoRegistro(id){
+      this.$router.push('/vacinas/' +id)
+    },
+
   },
   mounted() {
     this.dependente = {...this.getTask(this.$route.params.id)}
+
     if(this.dependente.sexo == "Masculino"){
       this.bgColor= '#B7D7F8'
     }else{
@@ -117,16 +147,16 @@ label{
 .registradas{
   margin-top: 20%;
   text-align: center;
-  margin-bottom: 10%;
 }
 
-.futuras{
+.vacinas{
+  margin-top: 5%;
   text-align: center;
 }
 
 .addVacin{
   position: absolute;
   margin-left: 85%;
-  margin-top: 55%;
+  margin-top: 10%;
 }
 </style>

@@ -2,7 +2,7 @@
   <q-form>
     <q-page class="page" :style="{ backgroundColor: bgColor }">
       <q-toolbar style="border-bottom: 1px black solid ;">
-        <q-btn flat dense color="white" icon="arrow_back"/>
+        <q-btn flat dense color="white" icon="arrow_back" @click="retorna"/>
       </q-toolbar>
 
       <div v-for="(task, key) in tasks" :key="key" class="dependentes">
@@ -69,8 +69,11 @@ export default defineComponent({
     },
     OpenDepen(id){
       this.$router.push('/menu/' + id)
-      console.log(id)
+    },
+    retorna(){
+      this.$router.push('/login')
     }
+
   },
 
 

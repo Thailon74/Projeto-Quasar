@@ -4,6 +4,10 @@ export function updateTask ({ commit }, payload) {
   commit('updateTask', payload)
 }
 
+export function updateTaskVacina ({ commit }, payload) {
+  commit('updateTaskVacina', payload)
+}
+
 export function deleteTask({ commit }, id) {
   commit('deleteTask', id)
 }
